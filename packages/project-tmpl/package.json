@@ -1,0 +1,23 @@
+{
+  "name": "@mz-fed/admin-project-tmpl",
+  "version": "0.0.0",
+  "description": "admin 工程模板",
+  "author": "wangmin <wangmin2@meizu.com>",
+  "homepage": "",
+  "license": "MIT",
+  "main": "lib/project-tmpl.js",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "gitHead": "44b6c967411e2f82f8d83c72fd74e4c7186b411c"
+}

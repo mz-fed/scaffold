@@ -1,0 +1,9 @@
+{
+  "packages": [
+    "packages/cli",
+    "packages/project-tmpl",
+    "packages/scaffold-tmpl"
+  ],
+  "version": "independent",
+  "npmClient": "yarn"
+}
