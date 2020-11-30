@@ -1,7 +1,13 @@
 {
   "name": "root",
   "private": true,
+  "workspaces": [
+    "packages/cli"
+  ],
   "devDependencies": {
-    "lerna": "^3.22.1"
+    "esbuild": "^0.8.14",
+    "lerna": "^3.22.1",
+    "ts-node": "^9.0.0",
+    "typescript": "^4.1.2"
   }
 }

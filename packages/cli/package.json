@@ -1,23 +1,45 @@
 {
   "name": "@mz-fed/admin-cli",
   "version": "0.0.0",
-  "description": "cli tools",
+  "description": "cli tool",
   "author": "wangmin <wangmin2@meizu.com>",
   "homepage": "",
   "license": "MIT",
-  "main": "lib/cli.js",
-  "directories": {
-    "lib": "lib",
-    "test": "__tests__"
+  "main": "src/cli.js",
+  "bin": {
+    "admin": "bin/admin.js"
   },
   "files": [
-    "lib"
+    "bin",
+    "dist"
   ],
   "publishConfig": {
     "access": "public"
   },
   "scripts": {
-    "test": "echo \"Error: run tests from root\" && exit 1"
+    "build": "rimraf dist && esbuild ./src/cli.ts --outfile=dist/cli.js --minify --sourcemap --platform=node",
+    "debug": "ts-node bin/admin.js",
+    "build2": "rimraf dist && tsc -p src/",
+    "dev": "tsc -w --incremental --p src/"
   },
-  "gitHead": "44b6c967411e2f82f8d83c72fd74e4c7186b411c"
+  "dependencies": {
+    "@types/validate-npm-package-name": "^3.0.0",
+    "download-git-repo": "^3.0.2",
+    "ejs": "^3.1.5",
+    "fast-glob": "^3.2.4",
+    "fs-extra": "^9.0.1",
+    "user-home": "^2.0.0",
+    "validate-npm-package-name": "^3.0.0",
+    "vite": "^1.0.0-rc.9"
+  },
+  "devDependencies": {
+    "@types/ejs": "^3.0.5",
+    "@types/fs-extra": "^9.0.4",
+    "cac": "^6.6.1",
+    "chalk": "^4.1.0",
+    "execa": "^4.1.0",
+    "minimist": "^1.2.5",
+    "rimraf": "^3.0.2",
+    "typescript": "^4.1.2"
+  }
 }
