@@ -33,8 +33,8 @@ export default async function init(name: string) {
     logger.error(`[admin-cli] 创建失败，存在同名的文件夹.`);
     process.exit(1);
   }
-  const projectTplName = path.join('m-templates', 'admin-project');
-  const scaffoldTplName = path.join('m-templates', 'admin-scaffold');
+  const projectTplName = path.join('mz-fed', 'admin-project-tmpl');
+  const scaffoldTplName = path.join('mz-fed', 'admin-scaffold-tmpl');
   const projectTplPath = path.join(userHome, '.', projectTplName);
   const scaffoldTplPath = path.join(userHome, '.', scaffoldTplName);
   const dls = [];

@@ -1,5 +1,5 @@
 {
-  "name": "@mz-fed/admin-cli",
+  "name": "@mz-fed/vite-scaffold-cli",
   "version": "0.0.0",
   "description": "cli tool",
   "author": "wangmin <wangmin2@meizu.com>",
@@ -7,7 +7,7 @@
   "license": "MIT",
   "main": "src/cli.js",
   "bin": {
-    "admin": "bin/admin.js"
+    "admin": "bin/index.js"
   },
   "files": [
     "bin",

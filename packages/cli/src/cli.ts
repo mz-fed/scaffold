@@ -44,7 +44,7 @@ async function genRoutes() {
   return Promise.resolve(0);
 }
 
-// 创建一个 admin 项目
+// 创建一个 vite 项目
 async function runInit(name: string) {
   return Promise.resolve(0);
 }
