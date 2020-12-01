@@ -1,4 +1,8 @@
 // const start = Date.now();
+const argv = require('minimist')(process.argv.slice(2));
+if (argv.debug) {
+  process.env.DEBUG = `mz-vite:` + (argv.debug === true ? '*' : argv.debug);
+}
 import { cac } from 'cac';
 import logger from './logger';
 import initProject from './init';
@@ -6,15 +10,17 @@ const execa = require('execa');
 const cli = cac('mz-vite');
 const vite = require.resolve('vite/bin/vite');
 const pkg = require('../package.json');
+logger.info(`${pkg.name} ${pkg.version}`);
+
+// global options
+cli.option('--debug [feat]', `[string | boolean]  show debug logs`);
 
 // default serve
-logger.info(`${pkg.name} ${pkg.version}`);
 cli
   .command('[serve]', '启动开发服务')
   .alias('serve')
   .action(async (_, argv: any) => {
     await genRoutes();
-
     return await execa(vite, [], {
       stdio: 'inherit',
     });

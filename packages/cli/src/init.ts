@@ -10,54 +10,75 @@ import logger from './logger';
 import inquirer from 'inquirer';
 import userHome from 'user-home';
 import validateProjectName from 'validate-npm-package-name';
-import { download, generateFiles } from './util';
+import { download, generateFiles, getGitUserInfo } from './util';
+const pkg = require('../package.json');
+const debug = require('debug')('mz-vite:init');
+
 export default async function init(name: string) {
   const cwd = process.cwd();
   const inCurrent = name === '.';
   const targetDir = path.resolve(cwd, name || '.');
   name = inCurrent ? path.relative('../', cwd) : name;
-  const projectType = await getProjectType();
-
   validate({ name, targetDir });
+  debug('validate ok');
+
+  const projectType = await getProjectType();
+  debug(
+    `init Project info:
+    cwd:${cwd}
+    inCurrent:${inCurrent}
+    targetDir:${targetDir}
+    name:${name}
+    projectType:${projectType}
+  `,
+  );
 
   const projectTplName = path.join('mz-fed', 'vite-project-tmpl');
-  // const scaffoldTplName = path.join('mz-fed', 'vite-scaffold-tmpl');
-  const projectTplPath = path.join(userHome, '.', projectTplName);
-  // const scaffoldTplPath = path.join(userHome, '.', scaffoldTplName);
+  const projectTplPath = path.join(userHome, '.' + projectTplName);
+  debug(`
+  tmpl info
+    projectTplPath:${projectTplPath}
+  `);
   const dls = [];
   !fs.existsSync(projectTplPath) &&
     dls.push(download(projectTplName, projectTplPath));
-  // !fs.existsSync(scaffoldTplPath) &&
-  //   dls.push(download(scaffoldTplName, scaffoldTplPath));
   try {
     if (dls.length > 0) {
       await Promise.all(dls);
     }
   } catch (e) {
-    logger.error(`[admin-cli] 创建失败，下载模板出错.`);
+    logger.error(`[admin-cli] 创建项目失败:下载模板出错.`);
     process.exit(1);
   }
+  const userInfo = await getGitUserInfo();
   const generateParams = {
     projectType,
     projectName: name,
+    userName: userInfo.name,
+    userEmail: userInfo.email,
   };
   try {
-    await generateFiles(projectTplName, targetDir, generateParams);
+    await generateFiles(
+      path.join(projectTplPath, `template`),
+      targetDir,
+      generateParams,
+    );
+    await generateFiles(
+      path.join(projectTplPath, `mz-${projectType}`),
+      path.join(targetDir, 'src/.mz'),
+      generateParams,
+    );
+    await fs.writeFile(
+      path.join(targetDir, '.mz'),
+      `CREATOR=${
+        userInfo.name
+      }\nCRATED_AT=${new Date().toString()}\nMZ_VITE_V=${pkg.version}`,
+      { flag: 'a' },
+    );
   } catch (error) {
     logger.error(`[admin-cli] 创建项目文件失败`);
     process.exit(1);
   }
-
-  // try {
-  //   await generateFiles(
-  //     scaffoldTplName,
-  //     `${targetDir}/src/.admin`,
-  //     generateParams,
-  //   );
-  // } catch (error) {
-  //   logger.error(`[admin-cli] 创建 admin 脚手架文件失败`);
-  //   process.exit(1);
-  // }
 }
 
 // 获取项目类型
@@ -85,7 +106,7 @@ async function validate(data: ValidateParams) {
   const { name, targetDir } = data;
   const verify = validateProjectName(name);
   if (!verify.validForNewPackages) {
-    logger.error('[admin-cli] 创建失败，无效的项目名称：' + name);
+    logger.error('[admin-cli] 创建项目失败：无效的项目名称：' + name);
     const { errors = [], warnings = [] } = verify as any;
     errors.forEach((item: any) => {
       logger.error(item);
@@ -97,7 +118,7 @@ async function validate(data: ValidateParams) {
   }
 
   if (fs.existsSync(targetDir)) {
-    logger.error(`[admin-cli] 创建失败，存在同名的文件夹.`);
+    logger.error(`[admin-cli] 创建项目失败：存在同名的文件夹.`);
     process.exit(1);
   }
 }

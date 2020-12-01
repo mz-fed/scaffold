@@ -22,12 +22,17 @@
     "dev": "tsc -w --incremental --p src/"
   },
   "dependencies": {
-    "@types/validate-npm-package-name": "^3.0.0",
+    "cac": "^6.6.1",
+    "chalk": "^4.1.0",
+    "debug": "^4.3.1",
     "download-git-repo": "^3.0.2",
     "ejs": "^3.1.5",
+    "execa": "^4.1.0",
     "fast-glob": "^3.2.4",
     "fs-extra": "^9.0.1",
     "inquirer": "^7.3.3",
+    "minimist": "^1.2.5",
+    "rimraf": "^3.0.2",
     "user-home": "^2.0.0",
     "validate-npm-package-name": "^3.0.0",
     "vite": "^1.0.0-rc.9"
@@ -36,11 +41,7 @@
     "@types/ejs": "^3.0.5",
     "@types/fs-extra": "^9.0.4",
     "@types/inquirer": "^7.3.1",
-    "cac": "^6.6.1",
-    "chalk": "^4.1.0",
-    "execa": "^4.1.0",
-    "minimist": "^1.2.5",
-    "rimraf": "^3.0.2",
+    "@types/validate-npm-package-name": "^3.0.0",
     "typescript": "^4.1.2"
   }
 }
