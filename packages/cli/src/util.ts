@@ -65,15 +65,19 @@ export function checkUpdate(pkgPath: string) {
 }
 
 // 创建项目文件
-export async function generateFiles(tplPath: string, target: string) {
+export async function generateFiles(
+  tplPath: string,
+  target: string,
+  params: any,
+) {
   if (process.cwd() !== target) {
     await fs.ensureDir(target);
   }
   const { name, email } = await getGitUserInfo();
-  const params = {
+  params = {
+    ...params,
     userName: name,
     userEmail: email,
-    projectName: target.split(path.sep).pop(),
   };
   tplPath = path.join(tplPath, 'template');
   const files = await fg(['**/*'], { cwd: tplPath, dot: true });

@@ -7,7 +7,7 @@
   "license": "MIT",
   "main": "src/cli.js",
   "bin": {
-    "admin": "bin/index.js"
+    "mz-vite": "bin/index.js"
   },
   "files": [
     "bin",
@@ -17,9 +17,8 @@
     "access": "public"
   },
   "scripts": {
-    "build": "rimraf dist && esbuild ./src/cli.ts --outfile=dist/cli.js --minify --sourcemap --platform=node",
     "debug": "ts-node bin/admin.js",
-    "build2": "rimraf dist && tsc -p src/",
+    "build": "rimraf dist && tsc -p src/",
     "dev": "tsc -w --incremental --p src/"
   },
   "dependencies": {
@@ -28,6 +27,7 @@
     "ejs": "^3.1.5",
     "fast-glob": "^3.2.4",
     "fs-extra": "^9.0.1",
+    "inquirer": "^7.3.3",
     "user-home": "^2.0.0",
     "validate-npm-package-name": "^3.0.0",
     "vite": "^1.0.0-rc.9"
@@ -35,6 +35,7 @@
   "devDependencies": {
     "@types/ejs": "^3.0.5",
     "@types/fs-extra": "^9.0.4",
+    "@types/inquirer": "^7.3.1",
     "cac": "^6.6.1",
     "chalk": "^4.1.0",
     "execa": "^4.1.0",

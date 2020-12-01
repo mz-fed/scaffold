@@ -1,10 +1,12 @@
 // const start = Date.now();
-const execa = require('execa');
 import { cac } from 'cac';
 import logger from './logger';
-const cli = cac('admin');
+import initProject from './init';
+const execa = require('execa');
+const cli = cac('mz-vite');
 const vite = require.resolve('vite/bin/vite');
 const pkg = require('../package.json');
+
 // default serve
 logger.info(`${pkg.name} ${pkg.version}`);
 cli
@@ -46,7 +48,7 @@ async function genRoutes() {
 
 // 创建一个 vite 项目
 async function runInit(name: string) {
-  return Promise.resolve(0);
+  return await initProject(name);
 }
 
 // 更新 admin 脚手架
