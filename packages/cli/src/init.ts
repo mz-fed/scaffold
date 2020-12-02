@@ -70,9 +70,12 @@ export default async function init(name: string) {
     );
     await fs.writeFile(
       path.join(targetDir, '.mz'),
-      `CREATOR=${
-        userInfo.name
-      }\nCRATED_AT=${new Date().toString()}\nMZ_VITE_V=${pkg.version}`,
+      JSON.stringify({
+        projectType,
+        creator: userInfo.name,
+        createAt: new Date().toString(),
+        mzViteVersion: pkg.version,
+      }),
       { flag: 'a' },
     );
   } catch (error) {
