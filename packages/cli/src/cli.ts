@@ -6,11 +6,25 @@ if (argv.debug) {
 import { cac } from 'cac';
 import logger from './logger';
 import initProject from './init';
+import fs from 'fs-extra';
+import path from 'path';
+
 const execa = require('execa');
 const cli = cac('mz-vite');
 const vite = require.resolve('vite/bin/vite');
 const pkg = require('../package.json');
+const debug = require('debug')('mz-vite:cli');
+
 logger.info(`${pkg.name} ${pkg.version}`);
+const isMzViteProject = fs.existsSync(path.join(process.cwd(), '.mz'));
+const checkIsMzViteProject = () => {
+  if (!isMzViteProject) {
+    logger.error('Error: 当前所在目录不是一个 mz-vite 项目！');
+    process.exit(1);
+  } else {
+    debug(fs.readFileSync(path.join(process.cwd(), '.mz')));
+  }
+};
 
 // global options
 cli.option('--debug [feat]', `[string | boolean]  show debug logs`);
@@ -20,6 +34,7 @@ cli
   .command('[serve]', '启动开发服务')
   .alias('serve')
   .action(async (_, argv: any) => {
+    checkIsMzViteProject();
     await genRoutes();
     return await execa(vite, [], {
       stdio: 'inherit',
@@ -27,6 +42,7 @@ cli
   });
 
 cli.command('build', '生产构建').action(async (_, argv: any) => {
+  checkIsMzViteProject();
   await genRoutes();
   return await execa(vite, ['build'], {
     stdio: 'inherit',
