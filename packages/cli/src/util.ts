@@ -18,6 +18,12 @@ interface UserInfo {
   email: string;
 }
 
+// 驼峰 转 中横线
+const hyphenateRE = /\B([A-Z])/g;
+export function hyphenate(str: string): string {
+  return str.replace(hyphenateRE, '-$1').toLowerCase();
+}
+
 export async function runCmd(cmd: string, argv?: any[], opts?: any) {
   argv = Array.isArray(argv) ? argv : [];
   opts = opts || {};

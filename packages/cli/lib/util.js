@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getGitUserInfo = exports.installDependencies = exports.generateFiles = exports.checkUpdate = exports.download = exports.runCmd = void 0;
+exports.getGitUserInfo = exports.installDependencies = exports.generateFiles = exports.checkUpdate = exports.download = exports.runCmd = exports.hyphenate = void 0;
 /*
   util.ts
   工具函数
@@ -18,6 +18,12 @@ const fast_glob_1 = __importDefault(require("fast-glob"));
 const path_1 = __importDefault(require("path"));
 const ejs_1 = __importDefault(require("ejs"));
 const logger_1 = __importDefault(require("./logger"));
+// 驼峰 转 中横线
+const hyphenateRE = /\B([A-Z])/g;
+function hyphenate(str) {
+    return str.replace(hyphenateRE, '-$1').toLowerCase();
+}
+exports.hyphenate = hyphenate;
 async function runCmd(cmd, argv, opts) {
     argv = Array.isArray(argv) ? argv : [];
     opts = opts || {};

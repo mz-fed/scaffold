@@ -242,8 +242,8 @@
         "affectsGlobalScope": false
       },
       "../src/type.d.ts": {
-        "version": "4020fdf760e65b8906ffd3741a0a308d5470c93fbf96f39a91d5d45a6f48970d",
-        "signature": "4020fdf760e65b8906ffd3741a0a308d5470c93fbf96f39a91d5d45a6f48970d",
+        "version": "ed5421938dc217309418f3fbe8b8931bc0934fa2cd10cd477ed7c3eaed2d241a",
+        "signature": "ed5421938dc217309418f3fbe8b8931bc0934fa2cd10cd477ed7c3eaed2d241a",
         "affectsGlobalScope": false
       },
       "../src/service.ts": {
@@ -387,8 +387,8 @@
         "affectsGlobalScope": false
       },
       "../src/util.ts": {
-        "version": "5fe527fe559bb4d6bc6e325f2053cfa5d5009fcd21b5f0c8cbd5b1de37f72183",
-        "signature": "fe59a0823b1493b97d1ebecf52bf7146607d4edc746754bb71bafc1b4b6c7df4",
+        "version": "499cab5f1eeb54148b2aad6dbd97ec2531f8fe6051678b0e1eb3171a1d40a44b",
+        "signature": "44563751b4dd3a57549a35988c0dffc389ed0785699139c85048b89123a85ec7",
         "affectsGlobalScope": false
       },
       "../src/plugins/build.ts": {
@@ -402,7 +402,7 @@
         "affectsGlobalScope": false
       },
       "../src/plugins/routes.ts": {
-        "version": "852064b4339cefa7ae33be110eb6e1e40939142a59354aead2f3559f655a8c78",
+        "version": "11c9b547b56472ba85f54551e96794284053b693b87adfce6bc8d56fd9701f7a",
         "signature": "dc83b290699fe0b812d8ba15ed95a11ec2160aabf1a54c6a1bdadb51c5882e9e",
         "affectsGlobalScope": false
       },
@@ -1768,7 +1768,8 @@
         "../../../node_modules/@types/node/fs.d.ts",
         "../../../node_modules/@types/node/path.d.ts",
         "../src/pluginapi.ts",
-        "../src/type.d.ts"
+        "../src/type.d.ts",
+        "../src/util.ts"
       ],
       "../src/plugins/serve.ts": [
         "../src/pluginapi.ts"

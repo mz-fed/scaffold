@@ -60,12 +60,12 @@ export type File = {
   name: string; // 文件名不包括后缀
   absPath: string; // 绝对路径
   isDir: boolean;
-  dirPath: string[];
+  dirs: string[]; // 目录层级
 };
 
 export type Dir = {
-  dirName: string;
+  name: string;
   path: string;
-  layout?: File;
+  hasLayout?: Boolean;
   files: File[];
 };
