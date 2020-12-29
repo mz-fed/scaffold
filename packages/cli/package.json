@@ -7,7 +7,7 @@
   "license": "MIT",
   "main": "src/cli.js",
   "bin": {
-    "mz-vite": "bin/index.js"
+    "mz-vite": "bin/mz-vite.js"
   },
   "files": [
     "bin",
@@ -22,6 +22,7 @@
     "dev": "tsc -w --incremental --p src/"
   },
   "dependencies": {
+    "assert": "^2.0.0",
     "cac": "^6.6.1",
     "chalk": "^4.1.0",
     "debug": "^4.3.1",
