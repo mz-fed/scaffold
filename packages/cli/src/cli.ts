@@ -3,7 +3,13 @@
   2020-12-28 15:55 Monday
 */
 
-import Service from './Service';
+import Service from "./Service";
+import logger from "./logger";
 
-const service = new Service();
-service.run();
+const service = new Service(process.cwd());
+try {
+  service.run();
+} catch (error) {
+  logger.error(error.message, error);
+  process.exit(1);
+}
